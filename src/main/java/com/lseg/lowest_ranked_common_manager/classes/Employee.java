@@ -2,11 +2,13 @@ package com.lseg.lowest_ranked_common_manager.classes;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.Level;
 
 public class Employee {
-    private static final Logger logger = LogManager.getLogger(Employee.class);
     private static int lastEmployeeID;
+    private static final int MAX_RANK = 5;
+    private static final int MIN_RANK = 1;
+    private static final Logger logger = LogManager.getLogger(Employee.class);
+
     private int id;
     private String name;
     private String address;
@@ -16,6 +18,9 @@ public class Employee {
     private Employee reportingEmployee1;
     private Employee reportingEmployee2;
 
+    /**
+     *
+     * */
     private Employee () {}
 
     public static Employee createNewEmployee (final String name, final String address,
@@ -31,14 +36,15 @@ public class Employee {
             theNewestEmployee.setReportingEmployee(reportingEmployee2);
             theNewestEmployee.setID();
         } catch (Exception e) {
-            logger.log(Level.WARN, e.toString());
-            System.out.println(e);
+            logger.error(e.toString());
             return null;
         }
         return theNewestEmployee;
     }
 
     public static String getTheNameOfTheLowestRankedCommonManager (Employee employee1, Employee employee2) {
+        if (employee1 == null || employee2 == null)
+            return "The input is null!";
         int rankEmployee1 = employee1.getRank();
         int rankEmployee2 = employee2.getRank();
         int rankMax = Math.max(rankEmployee1, rankEmployee2);
@@ -93,7 +99,7 @@ public class Employee {
     }
 
     private void setRank (final int rank) throws Exception {
-        if (rank < 1 || rank > 5)
+        if (rank < MIN_RANK || rank > MAX_RANK)
             throw new Exception("the rank field is out of range!");
         this.rank = rank;
     }
@@ -103,17 +109,24 @@ public class Employee {
     }
 
     public void setReportingEmployee(final Employee reportingEmployee) throws Exception {
-        if (reportingEmployee != null  && this.rank < 2)
+        if (reportingEmployee == null)
+            return;
+        if (reportingEmployee != null  && this.rank == MIN_RANK)
             throw new Exception("This Employee is not a manager (rank 1)!");
         if (reportingEmployee != null && reportingEmployee.getRank() >= this.rank)
             throw new Exception("The reporting employee should have a lower rank!");
         if (this.reportingEmployee1 != null && this.reportingEmployee2 != null)
             throw new Exception("You can only add 2 reporting employees to a manager");
+        if (reportingEmployee.getManager() != null)
+            throw new Exception("This employee already has a manager!");
+
         if (this.reportingEmployee1 == null) {
             this.reportingEmployee1 = reportingEmployee;
+            this.reportingEmployee1.setManager(this);
             return;
         }
         this.reportingEmployee2 = reportingEmployee;
+        this.reportingEmployee2.setManager(this);
     }
 
     private void setID () {
@@ -125,12 +138,12 @@ public class Employee {
         return this.name;
     }
 
-    public int getRank () {
-        return this.rank;
-    }
-
     public Employee getManager () {
         return this.manager;
+    }
+
+    public int getRank () {
+        return this.rank;
     }
 
     public  int getID () {

@@ -1,8 +1,11 @@
 package com.lseg.lowest_ranked_common_manager;
 
 import com.lseg.lowest_ranked_common_manager.classes.Employee;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class LowestRankedCommonManagerApplication {
+	private static final Logger logger = LogManager.getLogger(LowestRankedCommonManagerApplication.class);
 	static Employee e11, e12, e13, e14, e15, e16, e17, e18, e19;
 	static Employee e20, e21, e22, e23, e24, e25, e26;
 	static Employee e30, e31, e32, e33;
@@ -10,10 +13,23 @@ public class LowestRankedCommonManagerApplication {
 	static Employee e50, e51;
 
 	public static void main(String[] args) {
+		logger.info("---Data init step---");
 		initTestData();
-		System.out.println(Employee.getTheNameOfTheLowestRankedCommonManager(e12, e22));
-		System.out.println(Employee.getTheNameOfTheLowestRankedCommonManager(e32, e19));
-		System.out.println(Employee.getTheNameOfTheLowestRankedCommonManager(e15, e26));
+		logger.info("---Check the getTheNameOfTheLowestRankedCommonManager method---");
+
+		logger.info("Computing the result for e12 & e22");
+		logger.info("The result for e12 & e22 is " +
+				Employee.getTheNameOfTheLowestRankedCommonManager(e12, e22));
+
+		logger.info("Computing the result for e32 & e19");
+		logger.info("The result for e32 & e19 is " +
+				Employee.getTheNameOfTheLowestRankedCommonManager(e32, e19));
+
+		logger.info("Computing the result for e15 & e26");
+		logger.info("The result for e15 & e26 is " +
+				Employee.getTheNameOfTheLowestRankedCommonManager(e15, e26));
+
+		logger.info("---The job is done!---");
 	}
 
 	public static void initTestData () {
@@ -209,32 +225,14 @@ public class LowestRankedCommonManagerApplication {
 				e26,
 				null
 		);
-
-		e11.setManager(e20);
-		e12.setManager(e21);
-		e13.setManager(e22);
-		e14.setManager(e22);
-		e15.setManager(e23);
-		e16.setManager(e24);
-		e17.setManager(e24);
-		e18.setManager(e25);
-		e19.setManager(e25);
-
-		e20.setManager(e30);
-		e21.setManager(e30);
-		e22.setManager(e31);
-		e23.setManager(e32);
-		e24.setManager(e33);
-		e25.setManager(e33);
-		e26.setManager(e51);
-
-		e30.setManager(e40);
-		e31.setManager(e40);
-		e32.setManager(e41);
-		e33.setManager(e41);
-
-		e40.setManager(e50);
-		e41.setManager(e50);
+		Employee e512 = Employee.createNewEmployee(
+				"e51",
+				"e51 addr",
+				5,
+				null,
+				e26,
+				e12
+		);
 	}
 
 }
