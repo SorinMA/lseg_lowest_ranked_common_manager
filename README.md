@@ -1,0 +1,1 @@
+# lseg_lowest_ranked_common_manager
