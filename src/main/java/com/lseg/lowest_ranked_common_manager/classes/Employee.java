@@ -47,7 +47,10 @@ public class Employee {
             return "The input is null!";
         int rankEmployee1 = employee1.getRank();
         int rankEmployee2 = employee2.getRank();
-        int rankMax = Math.max(rankEmployee1, rankEmployee2);
+        int rankMax = Math.max(rankEmployee1, rankEmployee2) + 1; // + 1 because the method search for the common manager
+
+        if (rankMax > MAX_RANK)
+            return "One of the employee doesn't have a manager!";
 
         while (rankEmployee1 < rankMax) {
             employee1 = employee1.getManager();

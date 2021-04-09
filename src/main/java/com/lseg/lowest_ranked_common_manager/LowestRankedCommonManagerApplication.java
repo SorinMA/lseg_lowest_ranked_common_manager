@@ -29,6 +29,10 @@ public class LowestRankedCommonManagerApplication {
 		logger.info("The result for e15 & e26 is " +
 				Employee.getTheNameOfTheLowestRankedCommonManager(e15, e26));
 
+		logger.info("Computing the result for e50 & e11");
+		logger.info("The result for e50 & e11 is " +
+				Employee.getTheNameOfTheLowestRankedCommonManager(e50, e11));
+
 		logger.info("---The job is done!---");
 	}
 
