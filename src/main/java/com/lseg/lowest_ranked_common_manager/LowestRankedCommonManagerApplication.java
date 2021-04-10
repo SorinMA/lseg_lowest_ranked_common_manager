@@ -6,11 +6,11 @@ import org.apache.logging.log4j.Logger;
 
 public class LowestRankedCommonManagerApplication {
 	private static final Logger logger = LogManager.getLogger(LowestRankedCommonManagerApplication.class);
-	static Employee e11, e12, e13, e14, e15, e16, e17, e18, e19;
-	static Employee e20, e21, e22, e23, e24, e25, e26;
-	static Employee e30, e31, e32, e33;
-	static Employee e40, e41;
-	static Employee e50, e51, e52;
+	static Employee e11, e12, e13, e14, e15, e16, e17, e18, e19, e110;
+	static Employee e20, e21, e22, e23, e24, e25, e26, e27;
+	static Employee e30, e31, e32, e33, e34;
+	static Employee e40, e41, e42;
+	static Employee e50, e51, e52, e53;
 
 	public static void main(String[] args) {
 		logger.info("---Data init step---");
@@ -28,6 +28,9 @@ public class LowestRankedCommonManagerApplication {
 
 		logger.info("The RESULT for e50 & e11 is " +
 				Employee.getTheNameOfTheLowestRankedCommonManager(e50, e11));
+
+		logger.info("The RESULT for e27 & e110 is " +
+				Employee.getTheNameOfTheLowestRankedCommonManager(e27, e110));
 
 		logger.info("---The job is done!---");
 	}
@@ -232,6 +235,49 @@ public class LowestRankedCommonManagerApplication {
 				null,
 				e14,
 				e20
+		);
+
+		// the latest case
+		e110 = Employee.createNewEmployee(
+				"e110",
+				"e110 addr",
+				1,
+				null,
+				null,
+				null
+		);
+
+		e27 = Employee.createNewEmployee(
+				"e27",
+				"e27 addr",
+				2,
+				null,
+				null,
+				null
+		);
+		e34 = Employee.createNewEmployee(
+				"e34",
+				"e34 addr",
+				3,
+				null,
+				e27,
+				null
+		);
+		e42 = Employee.createNewEmployee(
+				"e42",
+				"e42 addr",
+				4,
+				null,
+				e110,
+				null
+		);
+		e53 = Employee.createNewEmployee(
+				"e53",
+				"e53 addr",
+				5,
+				null,
+				e42,
+				e34
 		);
 	}
 

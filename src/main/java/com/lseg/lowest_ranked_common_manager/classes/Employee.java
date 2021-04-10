@@ -60,20 +60,28 @@ public class Employee {
         if (rankMax > MAX_RANK)
             return "These 2 employees have no common supervisor! (One of the employees doesn't have a manager!)";
 
-        // step2.1: having the rankMax, we'll obtains the manager at rankMax for employee1
-        while (rankEmployee1 < rankMax) {
-            employee1 = employee1.getManager();
-            if (employee1 == null)
-                return "These 2 employees have no common supervisor";
-            rankEmployee1 = employee1.getRank();
-        }
+        while (true) { //step2.0 finding the managers for rankEmployee1 & rankEmployee2 with the same rank
+            // step2.1: having the rankMax, we'll obtains the manager at rankMax for employee1
+            while (rankEmployee1 < rankMax) {
+                employee1 = employee1.getManager();
+                if (employee1 == null)
+                    return "These 2 employees have no common supervisor";
+                rankEmployee1 = employee1.getRank();
+            }
 
-        // step2.2: having the rankMax, we'll obtains the manager at rankMax for employee2
-        while (rankEmployee2 < rankMax) {
-            employee2 = employee2.getManager();
-            if (employee2 == null)
-                return "These 2 employees have no common supervisor";
-            rankEmployee2 = employee2.getRank();
+            // step2.2: having the rankMax, we'll obtains the manager at rankMax for employee2
+            while (rankEmployee2 < rankMax) {
+                employee2 = employee2.getManager();
+                if (employee2 == null)
+                    return "These 2 employees have no common supervisor";
+                rankEmployee2 = employee2.getRank();
+            }
+
+            if (rankEmployee1 == rankEmployee2) { // 2.3.1: the managers were found
+                break;
+            } else { // 2.3.2: the managers found have diff. ranks, and will try again
+                rankMax = Math.max(rankEmployee1, rankEmployee2);
+            }
         }
 
         while (true) {
@@ -92,22 +100,30 @@ public class Employee {
                 rankEmployee2 = employee2.getRank();
                 rankMax = Math.max(rankEmployee1, rankEmployee2);
 
-                // 3.2.3: if the rank of manager1 (employee1) isn't the rankMax, we add obtain
-                // the rankMax manager for manager1
-                while (rankEmployee1 < rankMax) {
-                    employee1 = employee1.getManager();
-                    if (employee1 == null)
-                        return "These 2 employees have no common supervisor";
-                    rankEmployee1 = employee1.getRank();
-                }
+                while (true) { // 3.2.3: finding the managers for rankEmployee1 & rankEmployee2 with the same rank
+                    // 3.2.4: if the rank of manager1 (employee1) isn't the rankMax, we add obtain
+                    // the rankMax manager for manager1
+                    while (rankEmployee1 < rankMax) {
+                        employee1 = employee1.getManager();
+                        if (employee1 == null)
+                            return "These 2 employees have no common supervisor";
+                        rankEmployee1 = employee1.getRank();
+                    }
 
-                // 3.2.4: if the rank of manager2 (employee2) isn't the rankMax, we add obtain
-                // the rankMax manager for manager2
-                while (rankEmployee2 < rankMax) {
-                    employee2 = employee2.getManager();
-                    if (employee2 == null)
-                        return "These 2 employees have no common supervisor";
-                    rankEmployee2 = employee2.getRank();
+                    // 3.2.5: if the rank of manager2 (employee2) isn't the rankMax, we add obtain
+                    // the rankMax manager for manager2
+                    while (rankEmployee2 < rankMax) {
+                        employee2 = employee2.getManager();
+                        if (employee2 == null)
+                            return "These 2 employees have no common supervisor";
+                        rankEmployee2 = employee2.getRank();
+                    }
+
+                    if (rankEmployee1 == rankEmployee2) { // 3.2.6: the managers were found
+                        break;
+                    } else { // 3.2.7: the managers found have diff. ranks, and will try again
+                        rankMax = Math.max(rankEmployee1, rankEmployee2);
+                    }
                 }
             }
         }
