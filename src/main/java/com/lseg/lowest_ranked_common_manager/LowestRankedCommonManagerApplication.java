@@ -10,27 +10,23 @@ public class LowestRankedCommonManagerApplication {
 	static Employee e20, e21, e22, e23, e24, e25, e26;
 	static Employee e30, e31, e32, e33;
 	static Employee e40, e41;
-	static Employee e50, e51;
+	static Employee e50, e51, e52;
 
 	public static void main(String[] args) {
 		logger.info("---Data init step---");
 		initTestData();
 		logger.info("---Check the getTheNameOfTheLowestRankedCommonManager method---");
 
-		logger.info("Computing the result for e12 & e22");
-		logger.info("The result for e12 & e22 is " +
+		logger.info("The RESULT for e12 & e22 is " +
 				Employee.getTheNameOfTheLowestRankedCommonManager(e12, e22));
 
-		logger.info("Computing the result for e32 & e19");
-		logger.info("The result for e32 & e19 is " +
+		logger.info("The RESULT for e32 & e19 is " +
 				Employee.getTheNameOfTheLowestRankedCommonManager(e32, e19));
 
-		logger.info("Computing the result for e15 & e26");
-		logger.info("The result for e15 & e26 is " +
+		logger.info("The RESULT for e15 & e26 is " +
 				Employee.getTheNameOfTheLowestRankedCommonManager(e15, e26));
 
-		logger.info("Computing the result for e50 & e11");
-		logger.info("The result for e50 & e11 is " +
+		logger.info("The RESULT for e50 & e11 is " +
 				Employee.getTheNameOfTheLowestRankedCommonManager(e50, e11));
 
 		logger.info("---The job is done!---");
@@ -229,13 +225,13 @@ public class LowestRankedCommonManagerApplication {
 				e26,
 				null
 		);
-		Employee e512 = Employee.createNewEmployee(
+		e52 = Employee.createNewEmployee(
 				"e51",
 				"e51 addr",
 				5,
 				null,
-				e26,
-				e12
+				e14,
+				e20
 		);
 	}
 

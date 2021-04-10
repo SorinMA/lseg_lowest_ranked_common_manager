@@ -56,7 +56,8 @@ public class EmployeeUnitTests {
 
     /**
      * this test call the createNewEmployee with a reportingEmployee
-     * that already has a manager
+     * that already has a manager and should create the new employee
+     * and allocate the new employee as a manager for employeeTest
      */
     @Test
     public void createNewEmployeeUnitTest2 () {
@@ -68,6 +69,50 @@ public class EmployeeUnitTests {
                 employeeTest,
                 null
         );
-        assertEquals(testEmployee == null, true);
+        assertEquals(testEmployee == null, false);
+    }
+
+    /**
+     * this test will check the setManager methods
+     * */
+    @Test
+    public void createNewEmployeeUnitTest3 () {
+        Employee testEmployee = Employee.createNewEmployee(
+                "a",
+                "a",
+                4,
+                null,
+                null,
+                null
+        );
+        try {
+            testEmployee.setManager(managerTest2);
+            assertEquals(false, true);
+        } catch (Exception e) {
+            assertEquals(false, false);
+            assertEquals(e.getMessage(),"The manager should have higher rank than the reportingEmployee");
+        }
+    }
+
+    /**
+     * this test will check the setEmployee methods
+     * */
+    @Test
+    public void createNewEmployeeUnitTest4 () {
+        Employee testEmployee = Employee.createNewEmployee(
+                "a",
+                "a",
+                4,
+                null,
+                null,
+                null
+        );
+        try {
+            managerTest2.setEmployee1(testEmployee);
+            assertEquals(false, true);
+        } catch (Exception e) {
+            assertEquals(false, false);
+            assertEquals(e.getMessage(),"The reporting employee should have a lower rank!");
+        }
     }
 }
